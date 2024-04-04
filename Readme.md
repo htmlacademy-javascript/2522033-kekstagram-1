@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
-* Студент: [Николай Казанцев](https://up.htmlacademy.ru/javascript-individual/1/user/2522033).
-* Наставник: `Неизвестно`.
+- Студент: [Николай Казанцев](https://up.htmlacademy.ru/javascript-individual/1/user/2522033).
+- Наставник: `Евгений Колегов`.
 
 ---
 
