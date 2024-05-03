@@ -14,29 +14,7 @@ let obj = { name: 4, age: 25 };
 let ar = ["Vasiya", "Petiya", "Vova"];
 console.log(obj.name);
 console.log(ar[1]);
-
-// нужна функция которая будет возвращать случайное число в заданном диапазоне
-function getRandomIntInclusive(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1) + min); // Максимум и минимум включаются
-}
-
-let object = {
-  id: 1,
-  url: "photos/" + 2 + ".jpg",
-  description: "Красивое фото",
-  likes: getRandomIntInclusive(15, 200),
-  comments: [
-    {
-      id: 130,
-      avatar: "img/avatar-" + getRandomIntInclusive(1, 6) + ".svg",
-      message: "В целом всё неплохо. Но не всё хорошо.",
-      name: "Артём Левин",
-    },
-  ],
-};
-console.log(object);
+////Пока оставлю,для примера,потом удалю.
 
 // начало функции создатьОбъект
 // переменная объектФотографии присвоить какой то объект
@@ -71,5 +49,3 @@ for (let o = 1; o <= 25; o++) {
   objectPhoto.push(objectPhotoOne);
 }
 console.log(objectPhoto);
-
-// выведем в коносоль объектыФотографий ;
