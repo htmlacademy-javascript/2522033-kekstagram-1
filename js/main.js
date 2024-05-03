@@ -1,3 +1,2 @@
-import "./functions";
-import "./util";
-import "./data";
+import "./functions.js";
+import "./data.js";

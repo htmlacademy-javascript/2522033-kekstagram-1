@@ -1,3 +1,5 @@
+import { getRandomIntInclusive } from "./util.js";
+
 // Функция для проверки длины строки
 function checkStringLength(str, maxLength) {
   // Проверяем, меньше ли длина строки указанной максимальной длины

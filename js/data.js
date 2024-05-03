@@ -1,3 +1,5 @@
+import { getRandomIntInclusive } from "./util.js";
+
 let object = {
   id: 1,
   url: "photos/" + 2 + ".jpg",
