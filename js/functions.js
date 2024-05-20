@@ -9,15 +9,6 @@ function checkStringLength(str, maxLength) {
     return false; // Если нет, возвращаем false
   }
 }
-
-let xyz = checkStringLength("Работает!!!", 2);
-console.log(xyz);
-let obj = { name: 4, age: 25 };
-let ar = ["Vasiya", "Petiya", "Vova"];
-console.log(obj.name);
-console.log(ar[1]);
-////Пока оставлю,для примера,потом удалю.
-
 // начало функции создатьОбъект
 // переменная объектФотографии присвоить какой то объект
 // вернуть объектФотографии
@@ -25,7 +16,7 @@ console.log(ar[1]);
 function createObject(name, date, size) {
   let photoObject = {
     id: 2,
-    url: "photos/" + 3 + ".jpg",
+    url: "photos/" + getRandomIntInclusive(1, 25) + ".jpg",
     description: "Просто фото",
     likes: getRandomIntInclusive(15, 200),
     comments: [
@@ -51,3 +42,13 @@ for (let o = 1; o <= 25; o++) {
   objectPhoto.push(objectPhotoOne);
 }
 console.log(objectPhoto);
+
+let makeElement = function (tagName, className, text) {
+  let element = document.createElement(tagName);
+  element.classList.add(className);
+  if (text) {
+    element.textContent = text;
+  }
+  return element;
+};
+export { objectPhoto };
