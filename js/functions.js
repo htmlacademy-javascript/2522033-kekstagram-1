@@ -9,10 +9,6 @@ function checkStringLength(str, maxLength) {
     return false; // Если нет, возвращаем false
   }
 }
-// начало функции создатьОбъект
-// переменная объектФотографии присвоить какой то объект
-// вернуть объектФотографии
-// конец функции
 function createObject(name, date, size) {
   let photoObject = {
     id: 2,
@@ -31,11 +27,6 @@ function createObject(name, date, size) {
   return photoObject;
 }
 console.log(createObject);
-// переменная объектыФотографий и присвоим в переменную пустой массив
-// от ноля до двадцати пяти повторить:
-// переменная объектФотографии и присваиваем результат вызова функцию создатьОбъект
-// в объектыФотографий добавить объектФотографии
-// конец;
 let objectPhoto = [];
 for (let o = 1; o <= 25; o++) {
   let objectPhotoOne = createObject();

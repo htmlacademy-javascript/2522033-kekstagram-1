@@ -1,6 +1,8 @@
+import { renderBigPicture } from "./big-picture.js";
+
 let template = document.querySelector("#picture");
 let createElement = function (picture) {
-  let element = template.content.cloneNode(true);
+  let element = template.content.querySelector("a").cloneNode(true);
   let img = element.querySelector(".picture__img");
   img.src = picture.url;
   let likes = element.querySelector(".picture__likes");
@@ -14,8 +16,11 @@ let renderPictures = function (pictures) {
   let picturesContainer = document.querySelector(".pictures");
   for (let i = 0; pictures.length > i; i++) {
     let picture = pictures[i];
-    let x2 = createElement(picture);
-    picturesContainer.appendChild(x2);
+    let pictureElement = createElement(picture);
+    picturesContainer.appendChild(pictureElement);
+    pictureElement.addEventListener("click", (evt) => {
+      renderBigPicture(picture);
+    });
   }
 };
 export { renderPictures };
