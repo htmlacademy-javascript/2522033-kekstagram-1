@@ -44,3 +44,21 @@ document.addEventListener("keydown", (evt) => {
 // если хештег начинается начинается не с # вернуть false
 // если длинна хештега,больше 20 символов,вернуть false
 // если хештег содержит пробелы,вернуть false
+
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Escape") {
+    closeForm();
+  }
+});
+function validateHashtag(hashtag) {
+  if (!hashtag.startsWith("#")) {
+    return false;
+  }
+  if (hashtag.length > 20) {
+    return false;
+  }
+  if (hashtag.includes(" ")) {
+    return false;
+  }
+  return true;
+}
