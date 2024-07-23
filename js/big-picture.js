@@ -45,7 +45,6 @@ document.addEventListener("keydown", (evt) => {
     closeBigPicture();
   }
 });
-console.log(createComment);
 
 let renderComments = function (comments) {
   let commentsContainer = document.querySelector(".social__comments");
