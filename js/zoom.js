@@ -19,7 +19,7 @@ smallerButton.addEventListener("click", () => {
   // получает значение масштаба из элемента, преобразует его в число (parseInt) и сохраняет в переменную
   if (currentValue > 25) {
     currentValue -= 25;
-    reduceElement.value = currentValue;
+    reduceElement.value = currentValue + "%";
     let previewImage = document.querySelector(".img-upload__preview img");
     previewImage.style.transform = `scale(${currentValue / 100})`;
   }
@@ -47,7 +47,7 @@ biggerButton.addEventListener("click", () => {
 
   if (currentValue < 100) {
     currentValue += 25;
-    increaseElement.value = currentValue;
+    increaseElement.value = currentValue + "%";
     let previewImage = document.querySelector(".img-upload__preview img");
     previewImage.style.transform = `scale(${currentValue / 100})`;
   }

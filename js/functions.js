@@ -116,13 +116,12 @@ function createObject(name, date, size) {
   };
   return photoObject;
 }
-console.log(createObject);
+
 let objectPhoto = [];
 for (let o = 1; o <= 25; o++) {
   let objectPhotoOne = createObject();
   objectPhoto.push(objectPhotoOne);
 }
-console.log(objectPhoto);
 
 let makeElement = function (tagName, className, text) {
   let element = document.createElement(tagName);
