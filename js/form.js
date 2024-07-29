@@ -76,10 +76,6 @@ const onFormSubmit = (evt) => {
   // 1. Найти форму
   const form = document.querySelector(".img-upload__form");
 
-  // 2. Обработчик события "submit" для формы
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault(); // Предотвратить стандартную отправку формы
-
     // 3. Создать FormData с данными формы
     const formData = new FormData(form);
 
