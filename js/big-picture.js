@@ -1,19 +1,19 @@
-let createComment = function (comment) {
-  let li = document.createElement("li");
+const createComment = function (comment) {
+  const li = document.createElement('li');
   //создаем элемент li (document.createElement)
-  li.classList.add("social__comment");
+  li.classList.add('social__comment');
   //назначать элементу li класс (li.classList.add)
-  let img = document.createElement("img");
+  const img = document.createElement('img');
   //создать элемент img
-  img.classList.add("social__picture");
+  img.classList.add('social__picture');
   //добавить класс к img
   img.src = comment.avatar;
   // добавить атрибут src из comment.avatar
   li.appendChild(img);
   //добавить в элемент li элемент img (appendChild)
-  let p = document.createElement("p");
-  p.classList.add("social__text");
-  let commentText = comment.message;
+  const p = document.createElement('p');
+  p.classList.add('social__text');
+  const commentText = comment.message;
   p.textContent = commentText;
   li.appendChild(p);
   return li;
@@ -23,37 +23,37 @@ let createComment = function (comment) {
   // добавить его в li
   // вернуть элемент li(return)
 };
-let bigPicture = document.querySelector(".big-picture");
+const bigPicture = document.querySelector('.big-picture');
 function openBigPicture() {
-  document.body.classList.add("modal-open");
-  bigPicture.classList.remove("hidden");
+  document.body.classList.add('modal-open');
+  bigPicture.classList.remove('hidden');
 }
 // Функция для закрытия окна
 function closeBigPicture() {
   // Удаляем класс modal-open у body
-  document.body.classList.remove("modal-open");
+  document.body.classList.remove('modal-open');
 
   // Добавляем класс hidden к big-picture
-  bigPicture.classList.add("hidden");
+  bigPicture.classList.add('hidden');
 }
-let closeButton = document.querySelector("#picture-cancel");
+const closeButton = document.querySelector('#picture-cancel');
 // Обработчик нажатия на кнопку закрытия
-closeButton.addEventListener("click", closeBigPicture);
+closeButton.addEventListener('click', closeBigPicture);
 // Обработчик нажатия на клавишу Esc
-document.addEventListener("keydown", (evt) => {
-  if (evt.key === "Escape") {
+document.addEventListener('keydown', (evt) => {
+  if (evt.key === 'Escape') {
     closeBigPicture();
   }
 });
 
-let renderComments = function (comments) {
-  let commentsContainer = document.querySelector(".social__comments");
-  commentsContainer.innerHTML = "";
-  let loadMoreButton = document.querySelector(".social__comments-loader");
-  let commentCountElement = document.querySelector(".social__comment-count");
+const renderComments = function (comments) {
+  const commentsContainer = document.querySelector('.social__comments');
+  commentsContainer.innerHTML = '';
+  const loadMoreButton = document.querySelector('.social__comments-loader');
+  const commentCountElement = document.querySelector('.social__comment-count');
 
   let displayedCommentsCount = 0;
-  let totalCommentsCount = comments.length;
+  const totalCommentsCount = comments.length;
 
   // Принимает массив comments в качестве аргумента.
   // Получает ссылки на элементы DOM: commentsContainer, loadMoreButton, commentCountElement.
@@ -71,8 +71,8 @@ let renderComments = function (comments) {
       i < displayedCommentsCount + 5 && i < totalCommentsCount;
       i++
     ) {
-      let comment = comments[i];
-      let commentElement = createComment(comment);
+      const comment = comments[i];
+      const commentElement = createComment(comment);
       commentsContainer.appendChild(commentElement);
     }
 
@@ -83,7 +83,7 @@ let renderComments = function (comments) {
     updateCommentCount();
 
     if (displayedCommentsCount >= totalCommentsCount) {
-      loadMoreButton.style.display = "none";
+      loadMoreButton.style.display = 'none';
     }
   }
 
@@ -95,7 +95,7 @@ let renderComments = function (comments) {
   loadMoreComments();
 
   // Обработчик клика на кнопку "Загрузить ещё" class="social__comments-loader comments-loader"
-  loadMoreButton.addEventListener("click", loadMoreComments);
+  loadMoreButton.addEventListener('click', loadMoreComments);
 };
 // Вызывает loadMoreComments() для отображения первых 5 комментариев.
 // Добавляет обработчик клика к loadMoreButton, который вызывает loadMoreComments().
@@ -107,10 +107,10 @@ let renderComments = function (comments) {
 //когда коментарии заканчиваются,прятать кнопку 'загрузить еще'
 //изменить счетчик комментариев,согласно числу загруженных коментариев.
 
-let renderBigPicture = function (picture) {
-  let imgElement = document.querySelector(".big-picture__img img");
-  let textElement = document.querySelector(".likes-count");
-  let captionElement = document.querySelector(".social__caption");
+const renderBigPicture = function (picture) {
+  const imgElement = document.querySelector('.big-picture__img img');
+  const textElement = document.querySelector('.likes-count');
+  const captionElement = document.querySelector('.social__caption');
   captionElement.textContent = picture.description;
   // найти элемент с классом "social__caption"
   // присвоить ему в текст picture discription

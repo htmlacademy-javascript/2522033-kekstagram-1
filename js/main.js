@@ -1,10 +1,10 @@
-import { objectPhoto } from "./functions.js";
-import "./data.js";
-import { renderPictures } from "./picture.js";
-import "./form.js";
-import "./zoom.js";
-import { getData } from "./api.js";
-import { showAlert } from "./util.js";
+import { objectPhoto } from './functions.js';
+import './data.js';
+import { renderPictures } from './picture.js';
+import './form.js';
+import './zoom.js';
+import { getData } from './api.js';
+import { showAlert } from './util.js';
 
 // onFormSubmit(async (data) => {
 // try {

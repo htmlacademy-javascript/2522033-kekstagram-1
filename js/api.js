@@ -21,20 +21,20 @@
 // Функция для отправки данных на сервер
 // Экспортируем функции для использования в других частях кода
 
-const BASE_URL = "https://28.javascript.htmlacademy.pro/kekstagram";
+const BASE_URL = 'https://28.javascript.htmlacademy.pro/kekstagram';
 const Route = {
-  GET_DATA: "/data",
-  SEND_DATA: "/",
+  GET_DATA: '/data',
+  SEND_DATA: '/',
 };
 
 const Method = {
-  GET: "GET",
-  POST: "POST",
+  GET: 'GET',
+  POST: 'POST',
 };
 
 const ErrorText = {
-  GET_DATA: "Не удалось загрузить данные.Попробуйте обновить страницу",
-  SEND_DATA: "Не удалось отправить форму.Попробуйте еще раз",
+  GET_DATA: 'Не удалось загрузить данные.Попробуйте обновить страницу',
+  SEND_DATA: 'Не удалось отправить форму.Попробуйте еще раз',
 };
 
 const load = (route, errorText, method = Method.GET, body = null) =>

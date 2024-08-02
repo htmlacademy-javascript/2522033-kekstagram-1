@@ -1,4 +1,4 @@
-import { getRandomIntInclusive } from "./util.js";
+import { getRandomIntInclusive } from './util.js';
 
 // Функция для проверки длины строки
 function checkStringLength(str, maxLength) {
@@ -10,121 +10,121 @@ function checkStringLength(str, maxLength) {
   }
 }
 function createObject(name, date, size) {
-  let photoObject = {
+  const photoObject = {
     id: 2,
-    url: "photos/" + getRandomIntInclusive(1, 25) + ".jpg",
-    description: "Просто фото",
+    url: `photos/${ getRandomIntInclusive(1, 25) }.jpg`,
+    description: 'Просто фото',
     likes: getRandomIntInclusive(15, 200),
     comments: [
       {
         id: 13,
-        avatar: "img/avatar-" + getRandomIntInclusive(1, 6) + ".svg",
-        message: "В целом всё неплохо. Но не всё хорошо.",
-        name: "Левин",
+        avatar: `img/avatar-${ getRandomIntInclusive(1, 6) }.svg`,
+        message: 'В целом всё неплохо. Но не всё хорошо.',
+        name: 'Левин',
       },
       {
         id: 13,
-        avatar: "img/avatar-" + getRandomIntInclusive(1, 6) + ".svg",
-        message: "В целом всё неплохо. Но не всё хорошо.",
-        name: "Левин",
+        avatar: `img/avatar-${ getRandomIntInclusive(1, 6) }.svg`,
+        message: 'В целом всё неплохо. Но не всё хорошо.',
+        name: 'Левин',
       },
       {
         id: 13,
-        avatar: "img/avatar-" + getRandomIntInclusive(1, 6) + ".svg",
-        message: "В целом всё неплохо. Но не всё хорошо.",
-        name: "Левин",
+        avatar: `img/avatar-${ getRandomIntInclusive(1, 6) }.svg`,
+        message: 'В целом всё неплохо. Но не всё хорошо.',
+        name: 'Левин',
       },
       {
         id: 13,
-        avatar: "img/avatar-" + getRandomIntInclusive(1, 6) + ".svg",
-        message: "В целом всё неплохо. Но не всё хорошо.",
-        name: "Левин",
+        avatar: `img/avatar-${ getRandomIntInclusive(1, 6) }.svg`,
+        message: 'В целом всё неплохо. Но не всё хорошо.',
+        name: 'Левин',
       },
       {
         id: 13,
-        avatar: "img/avatar-" + getRandomIntInclusive(1, 6) + ".svg",
-        message: "В целом всё неплохо. Но не всё хорошо.",
-        name: "Левин",
+        avatar: `img/avatar-${ getRandomIntInclusive(1, 6) }.svg`,
+        message: 'В целом всё неплохо. Но не всё хорошо.',
+        name: 'Левин',
       },
       {
         id: 13,
-        avatar: "img/avatar-" + getRandomIntInclusive(1, 6) + ".svg",
-        message: "В целом всё неплохо. Но не всё хорошо.",
-        name: "Левин",
+        avatar: `img/avatar-${ getRandomIntInclusive(1, 6) }.svg`,
+        message: 'В целом всё неплохо. Но не всё хорошо.',
+        name: 'Левин',
       },
       {
         id: 13,
-        avatar: "img/avatar-" + getRandomIntInclusive(1, 6) + ".svg",
-        message: "В целом всё неплохо. Но не всё хорошо.",
-        name: "Левин",
+        avatar: `img/avatar-${ getRandomIntInclusive(1, 6) }.svg`,
+        message: 'В целом всё неплохо. Но не всё хорошо.',
+        name: 'Левин',
       },
       {
         id: 13,
-        avatar: "img/avatar-" + getRandomIntInclusive(1, 6) + ".svg",
-        message: "В целом всё неплохо. Но не всё хорошо.",
-        name: "Левин",
+        avatar: `img/avatar-${ getRandomIntInclusive(1, 6) }.svg`,
+        message: 'В целом всё неплохо. Но не всё хорошо.',
+        name: 'Левин',
       },
       {
         id: 13,
-        avatar: "img/avatar-" + getRandomIntInclusive(1, 6) + ".svg",
-        message: "В целом всё неплохо. Но не всё хорошо.",
-        name: "Левин",
+        avatar: `img/avatar-${ getRandomIntInclusive(1, 6) }.svg`,
+        message: 'В целом всё неплохо. Но не всё хорошо.',
+        name: 'Левин',
       },
       {
         id: 13,
-        avatar: "img/avatar-" + getRandomIntInclusive(1, 6) + ".svg",
-        message: "В целом всё неплохо. Но не всё хорошо.",
-        name: "Левин",
+        avatar: `img/avatar-${ getRandomIntInclusive(1, 6) }.svg`,
+        message: 'В целом всё неплохо. Но не всё хорошо.',
+        name: 'Левин',
       },
       {
         id: 13,
-        avatar: "img/avatar-" + getRandomIntInclusive(1, 6) + ".svg",
-        message: "В целом всё неплохо. Но не всё хорошо.",
-        name: "Левин",
+        avatar: `img/avatar-${ getRandomIntInclusive(1, 6) }.svg`,
+        message: 'В целом всё неплохо. Но не всё хорошо.',
+        name: 'Левин',
       },
       {
         id: 13,
-        avatar: "img/avatar-" + getRandomIntInclusive(1, 6) + ".svg",
-        message: "В целом всё неплохо. Но не всё хорошо.",
-        name: "Левин",
+        avatar: `img/avatar-${ getRandomIntInclusive(1, 6) }.svg`,
+        message: 'В целом всё неплохо. Но не всё хорошо.',
+        name: 'Левин',
       },
       {
         id: 13,
-        avatar: "img/avatar-" + getRandomIntInclusive(1, 6) + ".svg",
-        message: "В целом всё неплохо. Но не всё хорошо.",
-        name: "Левин",
+        avatar: `img/avatar-${ getRandomIntInclusive(1, 6) }.svg`,
+        message: 'В целом всё неплохо. Но не всё хорошо.',
+        name: 'Левин',
       },
       {
         id: 13,
-        avatar: "img/avatar-" + getRandomIntInclusive(1, 6) + ".svg",
-        message: "В целом всё неплохо. Но не всё хорошо.",
-        name: "Левин",
+        avatar: `img/avatar-${ getRandomIntInclusive(1, 6) }.svg`,
+        message: 'В целом всё неплохо. Но не всё хорошо.',
+        name: 'Левин',
       },
       {
         id: 13,
-        avatar: "img/avatar-" + getRandomIntInclusive(1, 6) + ".svg",
-        message: "В целом всё неплохо. Но не всё хорошо.",
-        name: "Левин",
+        avatar: `img/avatar-${ getRandomIntInclusive(1, 6) }.svg`,
+        message: 'В целом всё неплохо. Но не всё хорошо.',
+        name: 'Левин',
       },
       {
         id: 13,
-        avatar: "img/avatar-" + getRandomIntInclusive(1, 6) + ".svg",
-        message: "В целом всё неплохо. Но не всё хорошо.",
-        name: "Левин",
+        avatar: `img/avatar-${ getRandomIntInclusive(1, 6) }.svg`,
+        message: 'В целом всё неплохо. Но не всё хорошо.',
+        name: 'Левин',
       },
     ],
   };
   return photoObject;
 }
 
-let objectPhoto = [];
+const objectPhoto = [];
 for (let o = 1; o <= 25; o++) {
-  let objectPhotoOne = createObject();
+  const objectPhotoOne = createObject();
   objectPhoto.push(objectPhotoOne);
 }
 
-let makeElement = function (tagName, className, text) {
-  let element = document.createElement(tagName);
+const makeElement = function (tagName, className, text) {
+  const element = document.createElement(tagName);
   element.classList.add(className);
   if (text) {
     element.textContent = text;
