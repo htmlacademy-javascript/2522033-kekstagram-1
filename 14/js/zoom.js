@@ -10,17 +10,26 @@
 // объявляем функцию проверки свойства value="75%"
 // если значение переменной reduceElement =< 25 ,то значение свойства value="25%" не уменьшается.
 
-let smallerButton = document.querySelector(".scale__control--smaller");
+// Найти элементы
+const previewImage = document.querySelector('.img-upload__preview img');
+const sliderElement = document.querySelector('.effect-level__slider');
+const effectLevelValue = document.querySelector('.effect-level__value');
+const effectRadio = document.querySelectorAll('.effects__radio');
+const effectLevelContainer = document.querySelector(
+  '.img-upload__effect-level'
+);
 
-smallerButton.addEventListener("click", () => {
-  let reduceElement = document.querySelector(".scale__control--value");
-  let currentValue = parseInt(reduceElement.value);
+
+const smallerButton = document.querySelector('.scale__control--smaller');
+
+smallerButton.addEventListener('click', () => {
+  const reduceElement = document.querySelector('.scale__control--value');
+  let currentValue = parseInt(reduceElement.value,10);
   // reduceElement.value =
   // получает значение масштаба из элемента, преобразует его в число (parseInt) и сохраняет в переменную
   if (currentValue > 25) {
     currentValue -= 25;
-    reduceElement.value = currentValue + "%";
-    let previewImage = document.querySelector(".img-upload__preview img");
+    reduceElement.value = `${currentValue }%`;
     previewImage.style.transform = `scale(${currentValue / 100})`;
   }
 });
@@ -39,16 +48,15 @@ smallerButton.addEventListener("click", () => {
 // объявляем функцию проверки свойства value="50%"
 // если значение переменной increaseElement => 100 ,то значение свойства value="100%" не увеличивается.
 
-let biggerButton = document.querySelector(".scale__control--bigger");
+const biggerButton = document.querySelector('.scale__control--bigger');
 
-biggerButton.addEventListener("click", () => {
-  let increaseElement = document.querySelector(".scale__control--value");
-  let currentValue = parseInt(increaseElement.value);
+biggerButton.addEventListener('click', () => {
+  const increaseElement = document.querySelector('.scale__control--value');
+  let currentValue = parseInt(increaseElement.value,10);
 
   if (currentValue < 100) {
     currentValue += 25;
-    increaseElement.value = currentValue + "%";
-    let previewImage = document.querySelector(".img-upload__preview img");
+    increaseElement.value = `${currentValue }%`;
     previewImage.style.transform = `scale(${currentValue / 100})`;
   }
 });
@@ -74,11 +82,10 @@ biggerButton.addEventListener("click", () => {
 // В обработчике вызывается updateImageEffect(radio.value), передавая значение выбранной радиокнопки (radio.value).
 
 // Найти все радиокнопки
-let effectRadios = document.querySelectorAll(".effects__radio");
+const effectRadios = document.querySelectorAll('.effects__radio');
 
 // Функция для обновления класса эффекта изображения
 function updateImageEffect(effectClass) {
-  let previewImage = document.querySelector(".img-upload__preview img");
 
   // Удалить все классы эффектов
   effectRadios.forEach((radio) => {
@@ -91,7 +98,7 @@ function updateImageEffect(effectClass) {
 
 // Добавить обработчик события change для всех радиокнопок
 effectRadios.forEach((radio) => {
-  radio.addEventListener("change", () => {
+  radio.addEventListener('change', () => {
     updateImageEffect(radio.value);
   });
 });
@@ -110,19 +117,11 @@ effectRadios.forEach((radio) => {
 // обновляется стиль изображения и скрывается или показывается контейнер слайдера.
 // Инициализируется noUiSlider с необходимыми параметрами.
 
-// Найти элементы
-const previewImage = document.querySelector(".img-upload__preview img");
-const sliderElement = document.querySelector(".effect-level__slider");
-const effectLevelValue = document.querySelector(".effect-level__value");
-const effectRadio = document.querySelectorAll(".effects__radio");
-const effectLevelContainer = document.querySelector(
-  ".img-upload__effect-level"
-);
 
 // Инициализация noUiSlider
 noUiSlider.create(sliderElement, {
   start: [100], // Начальное значение 100%
-  connect: "lower",
+  connect: 'lower',
   range: {
     min: 0,
     max: 100,
@@ -138,33 +137,33 @@ noUiSlider.create(sliderElement, {
   },
 });
 
-let selectedEffect = "none"; // Начальный эффект - "Оригинал"
+let selectedEffect = 'none'; // Начальный эффект - "Оригинал"
 
 // Функция для обновления стиля изображения
 function updateImageStyle(effectClass, level) {
-  previewImage.style.filter = "";
+  previewImage.style.filter = '';
 
   switch (effectClass) {
-    case "chrome":
+    case 'chrome':
       previewImage.style.filter = `grayscale(${level / 100})`;
       break;
-    case "sepia":
+    case 'sepia':
       previewImage.style.filter = `sepia(${level / 100})`;
       break;
-    case "marvin":
+    case 'marvin':
       previewImage.style.filter = `invert(${level}%)`;
       break;
-    case "phobos":
+    case 'phobos':
       previewImage.style.filter = `blur(${level / 10}px)`;
       break;
-    case "heat":
+    case 'heat':
       previewImage.style.filter = `brightness(${level / 100})`;
       break;
   }
 }
 
 // Обработчик события change для слайдера
-sliderElement.noUiSlider.on("update", (values, handle) => {
+sliderElement.noUiSlider.on('update', (values, handle) => {
   const level = values[handle];
   effectLevelValue.value = level;
   updateImageStyle(selectedEffect, level);
@@ -172,7 +171,7 @@ sliderElement.noUiSlider.on("update", (values, handle) => {
 
 // Обработчик события change для радиокнопок
 effectRadio.forEach((radio) => {
-  radio.addEventListener("change", () => {
+  radio.addEventListener('change', () => {
     selectedEffect = radio.value;
 
     // Сброс уровня интенсивности
@@ -183,10 +182,10 @@ effectRadio.forEach((radio) => {
     updateImageStyle(selectedEffect, 100);
 
     // Скрыть или показать слайдер
-    if (selectedEffect === "none") {
-      effectLevelContainer.classList.add("hidden");
+    if (selectedEffect === 'none') {
+      effectLevelContainer.classList.add('hidden');
     } else {
-      effectLevelContainer.classList.remove("hidden");
+      effectLevelContainer.classList.remove('hidden');
     }
   });
 });
