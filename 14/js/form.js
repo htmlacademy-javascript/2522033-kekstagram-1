@@ -162,9 +162,6 @@ const onFormSubmit = async (evt) => {
   // обрабботать результат(успех показать шаблон success)
   // в случае ошибки (показать шаблон error).
 
-  // 1. Найти форму
-  const form = document.querySelector('.img-upload__form');
-
   // 2. Создать FormData с данными формы
   const formData = new FormData(form);
 
