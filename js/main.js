@@ -1,24 +1,20 @@
-import { objectPhoto } from './functions.js';
 import './data.js';
 import { renderPictures } from './picture.js';
 import './form.js';
 import './zoom.js';
 import { getData } from './api.js';
 import { showAlert } from './util.js';
+import './filter.js';
+import { switchFilters } from './filter.js';
 
-// onFormSubmit(async (data) => {
-// try {
-// await sendData(data);
-// hideModal();
-// showSuccessMessage();
-// } catch {
-// showErrorMessage();
-// }
-// });
 
 try {
-  const data = await getData();
-  renderPictures(data);
+  const photos = await getData();
+  const filterElement = document.querySelector('.img-filters');
+  filterElement.classList.remove('img-filters--inactive');
+  // Вызываем,после загрузки фотографии.
+  switchFilters (photos);
+  renderPictures(photos);
 } catch (err) {
   showAlert(err.message);
 }
