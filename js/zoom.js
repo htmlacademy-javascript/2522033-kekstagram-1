@@ -19,7 +19,6 @@ const effectLevelContainer = document.querySelector(
   '.img-upload__effect-level'
 );
 
-
 const smallerButton = document.querySelector('.scale__control--smaller');
 
 smallerButton.addEventListener('click', () => {
@@ -189,3 +188,5 @@ effectRadio.forEach((radio) => {
     }
   });
 });
+
+

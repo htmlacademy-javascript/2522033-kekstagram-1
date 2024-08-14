@@ -1,15 +1,6 @@
 import { getRandomIntInclusive } from './util.js';
 
-// Функция для проверки длины строки
-function checkStringLength(str, maxLength) {
-  // Проверяем, меньше ли длина строки указанной максимальной длины
-  if (str.length <= maxLength) {
-    return true; // Если да, возвращаем true
-  } else {
-    return false; // Если нет, возвращаем false
-  }
-}
-function createObject(name, date, size) {
+function createObject() {
   const photoObject = {
     id: 2,
     url: `photos/${ getRandomIntInclusive(1, 25) }.jpg`,
@@ -123,12 +114,5 @@ for (let o = 1; o <= 25; o++) {
   objectPhoto.push(objectPhotoOne);
 }
 
-const makeElement = function (tagName, className, text) {
-  const element = document.createElement(tagName);
-  element.classList.add(className);
-  if (text) {
-    element.textContent = text;
-  }
-  return element;
-};
+
 export { objectPhoto };
