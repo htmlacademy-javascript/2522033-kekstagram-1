@@ -20,7 +20,7 @@ const renderPictures = function (pictures) {
     const picture = pictures[i];
     const pictureElement = createElement(picture);
     fragment.appendChild(pictureElement);
-    pictureElement.addEventListener('click', (evt) => {
+    pictureElement.addEventListener('click', () => {
       renderBigPicture(picture);
     });
   }

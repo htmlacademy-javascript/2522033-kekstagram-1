@@ -1,4 +1,3 @@
-import './data.js';
 import { renderPictures } from './picture.js';
 import './form.js';
 import './zoom.js';

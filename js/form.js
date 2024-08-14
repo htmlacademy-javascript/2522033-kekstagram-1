@@ -131,8 +131,29 @@ const onCancelButtonClick = () => {
   hideModal();
 };
 
+// Получаем выбранный файл
+// Если файл выбран, считываем его как данные URL,проверить изображение на форматы jpg png
+// вызвать функцию showModal();
+// вызвать функцию URL.createObjectURL передать туда загруженный файл
+// Заменить изображение из атрибута src полученный URL присвоить в src изображения
+
 const onFileInputChange = () => {
-  showModal();
+// Получаем ссылку на элемент предварительного просмотра
+  const imagePreview = document.getElementById('img__upload-pictures');
+  // Получаем выбранный файл
+  const file = event.target.files[0];
+  if (file) {
+    // Проверяем формат изображения
+    const allowedTypes = ['image/jpeg', 'image/png'];
+    if (allowedTypes.includes(file.type)) {
+      // Вызываем функцию showModal() после того, как файл прочитан
+      showModal();
+      // Получаем URL выбранного файла
+      const imageUrl = URL.createObjectURL(file); // Используем URL.createObjectURL
+      // Заменяем изображение в атрибуте src
+      imagePreview.src = imageUrl;
+    }
+  }
 };
 
 const isValidTag = (tag) => VALID_SIMBOLS.test(tag);
@@ -182,3 +203,5 @@ form.addEventListener('submit', onFormSubmit);
 
 // Обработчик события keydown для документа
 document.addEventListener('keydown', onDocumentKeydown);
+
+
