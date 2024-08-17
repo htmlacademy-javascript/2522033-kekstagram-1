@@ -11,7 +11,6 @@ try {
   const photos = await getData();
   const filterElement = document.querySelector('.img-filters');
   filterElement.classList.remove('img-filters--inactive');
-  // Вызываем,после загрузки фотографии.
   switchFilters (photos);
   renderPictures(photos);
 } catch (err) {

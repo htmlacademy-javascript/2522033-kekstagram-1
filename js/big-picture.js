@@ -1,29 +1,39 @@
-const createComment = function (comment) {
-  const li = document.createElement('li');
-  //создаем элемент li (document.createElement)
-  li.classList.add('social__comment');
-  //назначать элементу li класс (li.classList.add)
-  const img = document.createElement('img');
-  //создать элемент img
-  img.classList.add('social__picture');
-  //добавить класс к img
-  img.src = comment.avatar;
-  // добавить атрибут src из comment.avatar
-  li.appendChild(img);
-  //добавить в элемент li элемент img (appendChild)
-  const p = document.createElement('p');
-  p.classList.add('social__text');
-  const commentText = comment.message;
-  p.textContent = commentText;
-  li.appendChild(p);
-  return li;
-  // Создать Элемент P
-  // добавить ему правильный класс
-  // записать ему в текст контент коммент текст
-  // добавить его в li
-  // вернуть элемент li(return)
-};
+const imgElement = document.querySelector('.big-picture__img img');
+const textElement = document.querySelector('.likes-count');
+const captionElement = document.querySelector('.social__caption');
 const bigPicture = document.querySelector('.big-picture');
+const closeButton = document.querySelector('#picture-cancel');
+
+const loadMoreButton = document.querySelector('.social__comments-loader');
+const commentCountElement = document.querySelector('.social__comment-count');
+const commentsContainer = document.querySelector('.social__comments');
+
+// Определяет функцию createComment, которая принимает объект comment в качестве аргумента.
+const createComment = function (comment) {
+  // Создаем элемент списка (li) для комментария
+  const li = document.createElement('li');
+  // Добавляем класс "social__comment" к элементу li
+  li.classList.add('social__comment');
+  // Создаем элемент изображения (img) для аватара
+  const img = document.createElement('img');
+  // Добавляем класс "social__picture" к элементу img
+  img.classList.add('social__picture');
+  // Устанавливаем источник изображения аватара
+  img.src = comment.avatar;
+  // Добавляем элемент изображения (img) в элемент списка (li)
+  li.appendChild(img);
+  // Создаем элемент абзаца (p) для текста комментария
+  const p = document.createElement('p');
+  // Добавляем класс "social__text" к элементу p
+  p.classList.add('social__text');
+  // Устанавливаем текст комментария
+  p.textContent = comment.message;
+  // Добавляем элемент абзаца (p) в элемент списка (li)
+  li.appendChild(p);
+  // Возвращаем созданный элемент списка (li)
+  return li;
+};
+
 function openBigPicture() {
   document.body.classList.add('modal-open');
   bigPicture.classList.remove('hidden');
@@ -32,11 +42,9 @@ function openBigPicture() {
 function closeBigPicture() {
   // Удаляем класс modal-open у body
   document.body.classList.remove('modal-open');
-
   // Добавляем класс hidden к big-picture
   bigPicture.classList.add('hidden');
 }
-const closeButton = document.querySelector('#picture-cancel');
 // Обработчик нажатия на кнопку закрытия
 closeButton.addEventListener('click', closeBigPicture);
 // Обработчик нажатия на клавишу Esc
@@ -47,78 +55,54 @@ document.addEventListener('keydown', (evt) => {
 });
 
 const renderComments = function (comments) {
-  const commentsContainer = document.querySelector('.social__comments');
+  // 1. Очищаем контейнер комментариев
   commentsContainer.innerHTML = '';
-  const loadMoreButton = document.querySelector('.social__comments-loader');
-  const commentCountElement = document.querySelector('.social__comment-count');
-
+  // 2. Инициализируем счетчик отображаемых комментариев
   let displayedCommentsCount = 0;
+  // 3. Получаем общее количество комментариев
   const totalCommentsCount = comments.length;
 
-  // Принимает массив comments в качестве аргумента.
-  // Получает ссылки на элементы DOM: commentsContainer, loadMoreButton, commentCountElement.
-  // Инициализирует displayedCommentsCount (5) и totalCommentsCount (длина массива comments).
-  // Вызывает updateCommentCount() для обновления начального числа комментариев.
-
+  // 4. Функция для обновления текста элемента commentCountElement
   function updateCommentCount() {
     commentCountElement.textContent = `(${displayedCommentsCount}/${totalCommentsCount})`;
   }
-  // Обновляет текст элемента commentCountElement, показывая displayedCommentsCount из totalCommentsCount.
-
+  // 5. Функция для загрузки дополнительных комментариев
   function loadMoreComments() {
-    for (
-      let i = displayedCommentsCount;
-      i < displayedCommentsCount + 5 && i < totalCommentsCount;
-      i++
-    ) {
-      const comment = comments[i];
-      const commentElement = createComment(comment);
-      commentsContainer.appendChild(commentElement);
+    // 6. Определяем максимальное количество комментариев для отображения
+    const maxToDisplay = Math.min(displayedCommentsCount + 5, totalCommentsCount);
+    // 7. Цикл для отображения следующих 5 комментариев
+    for (let i = displayedCommentsCount; i < maxToDisplay; i++) {
+      // 8. Создаем элемент комментария с помощью функции createComment
+      //    и добавляем его в контейнер commentsContainer
+      commentsContainer.appendChild(createComment(comments[i]));
     }
-
-    displayedCommentsCount =
-      displayedCommentsCount + 5 > totalCommentsCount
-        ? totalCommentsCount
-        : displayedCommentsCount + 5;
+    // 9. Обновляем счетчик отображаемых комментариев
+    displayedCommentsCount = maxToDisplay;
+    // 10. Обновляем текст элемента, отображающего количество комментариев
     updateCommentCount();
-
+    // 11. Если все комментарии уже отображены, скрываем кнопку "Загрузить больше"
     if (displayedCommentsCount >= totalCommentsCount) {
       loadMoreButton.style.display = 'none';
     }
   }
 
-  // В цикле for добавляет по 5 комментариев в commentsContainer, начиная с displayedCommentsCount.
-  // Обновляет displayedCommentsCount и вызывает updateCommentCount().
-  // Скрывает loadMoreButton, если все комментарии отображены.
-
-  // Отображение первых 5 комментариев
+  // 12. Вызываем функцию loadMoreComments для отображения первых 5 комментариев
   loadMoreComments();
 
-  // Обработчик клика на кнопку "Загрузить ещё" class="social__comments-loader comments-loader"
+  // 13. Добавляем обработчик события 'click' к кнопке "Загрузить ещё"
   loadMoreButton.addEventListener('click', loadMoreComments);
 };
-// Вызывает loadMoreComments() для отображения первых 5 комментариев.
-// Добавляет обработчик клика к loadMoreButton, который вызывает loadMoreComments().
-
-//В параметрах функции получаем массив коментариев,которые нужно отрисовать.
-//нужно отловить событие нажав на кнопку 'загрузить еще'
-//добавляем по 5 комментариев
-//понять длинну массива коментариев
-//когда коментарии заканчиваются,прятать кнопку 'загрузить еще'
-//изменить счетчик комментариев,согласно числу загруженных коментариев.
-
+// Определяем функцию renderBigPicture, которая принимает объект picture в качестве аргумента.
 const renderBigPicture = function (picture) {
-  const imgElement = document.querySelector('.big-picture__img img');
-  const textElement = document.querySelector('.likes-count');
-  const captionElement = document.querySelector('.social__caption');
+  // Устанавливаем текст описания в элемент captionElement
   captionElement.textContent = picture.description;
-  // найти элемент с классом "social__caption"
-  // присвоить ему в текст picture discription
-
+  // Загружаем изображение в imgElement
   imgElement.src = picture.url;
+  // Устанавливаем количество лайков в элемент textElement
   textElement.textContent = picture.likes;
-
+  // Отрисовываем комментарии
   renderComments(picture.comments);
+  // Открываем модальное окно с большой картинкой
   openBigPicture();
 };
 
