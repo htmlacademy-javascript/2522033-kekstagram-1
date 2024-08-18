@@ -18,7 +18,7 @@ const debounce = (callback, timeoutDelay = 500) => {
     // пока действие совершается чаще, чем переданная задержка timeoutDelay
   };
 };
-
+// Создаем дебаунсенную версию функции renderPictures
 const debounceRenderPictures = debounce (renderPictures);
 
 
