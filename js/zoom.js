@@ -81,7 +81,6 @@ biggerButton.addEventListener('click', () => {
 // Для каждой радиокнопки добавляет обработчик события change.
 // В обработчике вызывается updateImageEffect(radio.value), передавая значение выбранной радиокнопки (radio.value).
 
-
 // Функция для обновления класса эффекта изображения
 function updateImageEffect(effectClass) {
   // Удалить все классы эффектов
