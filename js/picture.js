@@ -1,6 +1,5 @@
 import { renderBigPicture } from './big-picture.js';
 
-
 const template = document.querySelector('#picture');
 const createElement = function (picture) {
   const element = template.content.querySelector('a').cloneNode(true);
@@ -14,17 +13,24 @@ const createElement = function (picture) {
 };
 
 const renderPictures = function (pictures) {
+  //  Получаем ссылку на контейнер для изображений на странице
   const picturesContainer = document.querySelector('.pictures');
+  //  Создаем фрагмент документа для оптимизации DOM-манипуляций
   const fragment = document.createDocumentFragment();
+  //  Проходим по каждому изображению в массиве pictures
   for (let i = 0; pictures.length > i; i++) {
+    //  Получаем текущее изображение из массива
     const picture = pictures[i];
+    //  Создаем элемент изображения с помощью функции createElement
     const pictureElement = createElement(picture);
+    //  Добавляем созданный элемент в фрагмент документа
     fragment.appendChild(pictureElement);
-    pictureElement.addEventListener('click', () => {
-      renderBigPicture(picture);
-    });
+    //  Добавляем обработчик события 'click' к элементу изображения
+    pictureElement.addEventListener('click', () => renderBigPicture(picture));
   }
+  //  Удаляем все существующие элементы изображений из контейнера
   picturesContainer.querySelectorAll('.picture').forEach((picture) => picture.remove());
+  //  Добавляем фрагмент документа (содержащий все новые элементы изображений) в контейнер
   picturesContainer.appendChild(fragment);
 };
 

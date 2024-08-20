@@ -1,10 +1,70 @@
 import { sendData } from './api.js';
+
+// Текст ошибки для неправильно заполненных хештегов
+const TAG_ERROR_TEXT = 'Неправильно заполнены хештеги';
+// Максимальное количество хештегов
+const MAX_HASHTAG_COUNT = 5;
+// Регулярное выражение для проверки валидности хештега
+const VALID_SIMBOLS = /^#[a-zA-Zа-яА-Я0-9]{1,19}$/;
+
+const form = document.querySelector('.img-upload__form');
+const overlay = document.querySelector('.img-upload__overlay');
+const body = document.querySelector('body');
+const cancelButton = document.querySelector('#upload-cancel');
+const fileField = document.querySelector('#upload-file');
+const hashtagField = document.querySelector('.text__hashtags');
+const commentField = document.querySelector('.text__discription');
+
+
+// 1. Создаем объект Pristine для валидации формы
+const pristine = new Pristine(form, {
+  // 2. Указываем, куда добавлять классы при валидации
+  classTo: 'img-upload__field-wrapper',
+  // 3. Указываем, где отображать сообщения об ошибках
+  errorTextParent: 'img-upload__field-wrapper',
+  // 4. Указываем класс для сообщений об ошибках
+  errorTextClass: 'img-upload__field-wrapper__error',
+});
+
+// 5. Функция для проверки валидности одного хештега
+const isValidTag = (tag) => VALID_SIMBOLS.test(tag);
+
+// 6. Функция для проверки количества хештегов
+const hasValidCount = (tags) => tags.length <= MAX_HASHTAG_COUNT;
+
+// 7. Функция для проверки уникальности хештегов
+const hasUniqueTags = (tags) => {
+  // 8. Преобразуем хештеги в нижний регистр для проверки
+  const lowerCaseTags = tags.map((tag) => tag.toLowerCase());
+  // 9. Проверяем, что количество хештегов равно размеру множества
+  //    (т.е. все хештеги уникальны)
+  return lowerCaseTags.length === new Set(lowerCaseTags).size;
+};
+
+// 10. Функция для валидации хештегов
+const validateTags = (value) => {
+  // 11. Разбиваем строку с хештегами на массив
+  const tags = value
+    .trim()
+    .split(' ')
+    .filter((tag) => tag.trim().length);
+  // 12. Проверяем, что хештеги валидны по количеству, уникальности и формату
+  return hasValidCount(tags) && hasUniqueTags(tags) && tags.every(isValidTag);
+};
+
+// 13. Функция для проверки, фокусирован ли текстовое поле
+const isTextFiledFocused = () =>
+  // 14. Проверяем, активен ли элемент hashtagField или commentField
+  document.activeElement === hashtagField ||
+  document.activeElement === commentField;
+
+
 // найти элемент из шаблона success
-const SuccessMessage = document.querySelector('#success');
+const successMessage = document.querySelector('#success');
 // обьявить функцию showSuccessMessage
 const showSuccessMessage = function(){
   // Клонировать
-  const clonedElement = SuccessMessage.content.querySelector('.success').cloneNode(true);
+  const clonedElement = successMessage.content.querySelector('.success').cloneNode(true);
   // вставляем в ДОМ
   document.body.appendChild(clonedElement);
   // Найти элемент кнопка
@@ -43,7 +103,6 @@ const showSuccessMessage = function(){
 };
 
 // Функция при возникновении ошибки отправки формы
-
 // найти элемент из шаблона Error
 const errorMessage = document.querySelector('#error');
 // обьявить функцию showErrorMessage
@@ -87,47 +146,36 @@ const showErrorMessage = function(){
   });
 };
 
-
-const TAG_ERROR_TEXT = 'Неправильно заполнены хештеги';
-const MAX_HASHTAG_COUNT = 5;
-const VALID_SIMBOLS = /^#[a-zA-Zа-яА-Я0-9]{1,19}$/;
-
-const form = document.querySelector('.img-upload__form');
-const overlay = document.querySelector('.img-upload__overlay');
-const body = document.querySelector('body');
-const cancelButton = document.querySelector('#upload-cancel');
-const fileField = document.querySelector('#upload-file');
-const hashtagField = document.querySelector('.text__hashtags');
-const commentField = document.querySelector('.text__discription');
-
-const pristine = new Pristine(form, {
-  classTo: 'img-upload__field-wrapper',
-  errorTextParent: 'img-upload__field-wrapper',
-  errorTextClass: 'img-upload__field-wrapper__error',
-});
-
-const isTextFiledFocused = () =>
-  document.activeElement === hashtagField ||
-  document.activeElement === commentField;
-
+//  Функция обработчик нажатия клавиши на документе
 function onDocumentKeydown(evt) {
+  //  Проверяем, была ли нажата клавиша Escape
   if (evt.key === 'Escape' && !isTextFiledFocused()) {
+    //  Предотвращаем стандартное поведение Escape (например, закрытие модального окна в браузере)
     evt.preventDefault();
+    //  Вызываем функцию hideModal для скрытия модального окна
     hideModal();
   }
 }
 
+//  Функция для показа модального окна
 function showModal() {
+  //  Удаляем класс "hidden" из элемента overlay, делая его видимым
   overlay.classList.remove('hidden');
+  //  Добавляем класс "modal-open" к элементу body, чтобы заблокировать прокрутку
   body.classList.add('modal-open');
 }
 
+//  Функция для скрытия модального окна
 function hideModal() {
+  //  Добавляем класс "hidden" к элементу overlay, скрывая его
   overlay.classList.add('hidden');
+  //  Удаляем класс "modal-open" из элемента body, чтобы вернуть прокрутку
   body.classList.remove('modal-open');
 }
 
+//  Функция обработчик клика по кнопке "Отмена"
 const onCancelButtonClick = () => {
+  //  Вызываем функцию hideModal для скрытия модального окна
   hideModal();
 };
 
@@ -155,50 +203,34 @@ const onFileInputChange = () => {
     }
   }
 };
-
-const isValidTag = (tag) => VALID_SIMBOLS.test(tag);
-
-const hasValidCount = (tags) => tags.length <= MAX_HASHTAG_COUNT;
-
-const hasUniqueTags = (tags) => {
-  const lowerCaseTags = tags.map((tag) => tag.toLowerCase());
-  return lowerCaseTags.length === new Set(lowerCaseTags).size;
-};
-
-const validateTags = (value) => {
-  const tags = value
-    .trim()
-    .split(' ')
-    .filter((tag) => tag.trim().length);
-  return hasValidCount(tags) && hasUniqueTags(tags) && tags.every(isValidTag);
-};
-
+// Добавляем валидатор для поля с хештегами
 pristine.addValidator(hashtagField, validateTags, TAG_ERROR_TEXT);
 
 const onFormSubmit = async (evt) => {
+  // Предотвращаем стандартное поведение отправки формы (перезагрузка страницы)
   evt.preventDefault();
-  // найти форму
-  // с помощью формДата,создать тело.
-  // с помощью сенДата отправить.
-  // обрабботать результат(успех показать шаблон success)
-  // в случае ошибки (показать шаблон error).
 
-  // 2. Создать FormData с данными формы
+  //  Создать FormData с данными формы
   const formData = new FormData(form);
 
-  // 4. Отправить данные с помощью sendData
+  //  Отправить данные с помощью sendData
   try {
     await sendData(formData);
     hideModal();
     showSuccessMessage();
   } catch (error) {
-    // 4.3. Ошибка: показать шаблон error
+    // Ошибка: показать шаблон error
     showErrorMessage();
   }
 };
 
+//  Добавляем обработчик события 'change' для поля выбора файла (fileField)
 fileField.addEventListener('change', onFileInputChange);
+
+//  Добавляем обработчик события 'click' для кнопки "Отмена" (cancelButton)
 cancelButton.addEventListener('click', onCancelButtonClick);
+
+//  Добавляем обработчик события 'submit' для формы (form)
 form.addEventListener('submit', onFormSubmit);
 
 // Обработчик события keydown для документа
