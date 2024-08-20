@@ -185,7 +185,7 @@ const onCancelButtonClick = () => {
 // вызвать функцию URL.createObjectURL передать туда загруженный файл
 // Заменить изображение из атрибута src полученный URL присвоить в src изображения
 
-const onFileInputChange = () => {
+const onFileInputChange = (event) => {
 // Получаем ссылку на элемент предварительного просмотра
   const imagePreview = document.getElementById('img__upload-pictures');
   // Получаем выбранный файл
