@@ -70,5 +70,4 @@ const switchFilters = function (photos) {
   });
 };
 
-
 export { switchFilters } ;
