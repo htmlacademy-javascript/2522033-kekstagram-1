@@ -107,4 +107,3 @@ const renderBigPicture = function (picture) {
 };
 
 export { renderBigPicture };
-
