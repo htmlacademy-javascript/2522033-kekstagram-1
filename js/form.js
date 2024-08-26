@@ -13,8 +13,10 @@ const body = document.querySelector('body');
 const cancelButton = document.querySelector('#upload-cancel');
 const fileField = document.querySelector('#upload-file');
 const hashtagField = document.querySelector('.text__hashtags');
-const commentField = document.querySelector('.text__discription');
-
+const commentField = document.querySelector('.text__description');
+// Получаем ссылку на элемент предварительного просмотра
+const imagePreview = document.getElementById('img__upload-pictures');
+const sendButton = document.querySelector('.img-upload__submit');
 
 // 1. Создаем объект Pristine для валидации формы
 const pristine = new Pristine(form, {
@@ -52,11 +54,11 @@ const validateTags = (value) => {
   return hasValidCount(tags) && hasUniqueTags(tags) && tags.every(isValidTag);
 };
 
-// 13. Функция для проверки, фокусирован ли текстовое поле
+// 13. Функция для проверки, фокусировано ли текстовое поле
 const isTextFiledFocused = () =>
   // 14. Проверяем, активен ли элемент hashtagField или commentField
   document.activeElement === hashtagField ||
-  document.activeElement === commentField;
+  document.activeElement === commentField ;
 
 
 // найти элемент из шаблона success
@@ -113,12 +115,14 @@ const showErrorMessage = function(){
   document.body.appendChild(errorElement);
   // Найти элемент кнопка
   const errorButton = document.querySelector('.error__button');
-
+  document.removeEventListener('keydown', onDocumentKeydown);
 
   // обьявить функцию onKeydownClick
   function onKeydownClick(event) {
     // в функции проверяем событие Keydown,если Esc то закрыть окно и удалить обработчик onKeydownClick.
     if (event.key === 'Escape') {
+      document .addEventListener('keydown', onDocumentKeydown);
+      event.stopImmediatePropagation();
       document.removeEventListener('keydown', onKeydownClick);
       errorElement.remove();
     }
@@ -129,6 +133,7 @@ const showErrorMessage = function(){
   errorButton.addEventListener('click',() => {
     // Удалить Элемент из ДОМ
     errorElement.remove();
+    document.addEventListener('keydown', onDocumentKeydown);
     // удалить обработчик события с Esc
     document.removeEventListener('keydown', onKeydownClick);
   });
@@ -138,6 +143,7 @@ const showErrorMessage = function(){
   // в обработчике
   // Если evt.target === клонированному элементу,то
     if (evt.target === errorElement) {
+      document.addEventListener('keydown', onDocumentKeydown);
       // удалить элемент из ДОМ
       errorElement.remove();
       // и удалить обработчик с Esc
@@ -167,6 +173,8 @@ function showModal() {
 
 //  Функция для скрытия модального окна
 function hideModal() {
+  form.reset();
+  imagePreview.style = '';
   //  Добавляем класс "hidden" к элементу overlay, скрывая его
   overlay.classList.add('hidden');
   //  Удаляем класс "modal-open" из элемента body, чтобы вернуть прокрутку
@@ -186,8 +194,6 @@ const onCancelButtonClick = () => {
 // Заменить изображение из атрибута src полученный URL присвоить в src изображения
 
 const onFileInputChange = (event) => {
-// Получаем ссылку на элемент предварительного просмотра
-  const imagePreview = document.getElementById('img__upload-pictures');
   // Получаем выбранный файл
   const file = event.target.files[0];
   if (file) {
@@ -209,25 +215,30 @@ pristine.addValidator(hashtagField, validateTags, TAG_ERROR_TEXT);
 const onFormSubmit = async (evt) => {
   // Предотвращаем стандартное поведение отправки формы (перезагрузка страницы)
   evt.preventDefault();
-
+  if (!pristine.validate()){
+    // return;
+  }
   //  Создать FormData с данными формы
   const formData = new FormData(form);
 
   //  Отправить данные с помощью sendData
   try {
+    sendButton.disabled = true;
     await sendData(formData);
     hideModal();
+    sendButton.disabled = false;
     showSuccessMessage();
   } catch (error) {
     // Ошибка: показать шаблон error
     showErrorMessage();
+    sendButton.disabled = false;
   }
 };
 
 //  Добавляем обработчик события 'change' для поля выбора файла (fileField)
 fileField.addEventListener('change', onFileInputChange);
 
-//  Добавляем обработчик события 'click' для кнопки "Отмена" (cancelButton)
+//  Добавляем обработчик события 'click' для кнопки "Отмена(крестик)" (cancelButton)
 cancelButton.addEventListener('click', onCancelButtonClick);
 
 //  Добавляем обработчик события 'submit' для формы (form)

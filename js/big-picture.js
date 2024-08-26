@@ -7,6 +7,7 @@ const closeButton = document.querySelector('#picture-cancel');
 const loadMoreButton = document.querySelector('.social__comments-loader');
 const commentCountElement = document.querySelector('.social__comment-count');
 const commentsContainer = document.querySelector('.social__comments');
+let onLoadMoreButtonClick = null;
 
 // Определяет функцию createComment, которая принимает объект comment в качестве аргумента.
 const createComment = function (comment) {
@@ -44,6 +45,9 @@ function closeBigPicture() {
   document.body.classList.remove('modal-open');
   // Добавляем класс hidden к big-picture
   bigPicture.classList.add('hidden');
+  if (onLoadMoreButtonClick !== null) {
+    loadMoreButton.removeEventListener('click', onLoadMoreButtonClick);
+  }
 }
 // Обработчик нажатия на кнопку закрытия
 closeButton.addEventListener('click', closeBigPicture);
@@ -82,15 +86,23 @@ const renderComments = function (comments) {
     updateCommentCount();
     // 11. Если все комментарии уже отображены, скрываем кнопку "Загрузить больше"
     if (displayedCommentsCount >= totalCommentsCount) {
-      loadMoreButton.style.display = 'none';
+      loadMoreButton.classList.add('hidden');
+    }else{
+      loadMoreButton.classList.remove('hidden');
+      onLoadMoreButtonClick = () => {
+        loadMoreComments();
+      };
+
+
+      // 13. Добавляем обработчик события 'click' к кнопке "Загрузить ещё"
+      loadMoreButton.addEventListener('click', onLoadMoreButtonClick, {once: true});
     }
   }
 
   // 12. Вызываем функцию loadMoreComments для отображения первых 5 комментариев
   loadMoreComments();
 
-  // 13. Добавляем обработчик события 'click' к кнопке "Загрузить ещё"
-  loadMoreButton.addEventListener('click', loadMoreComments);
+
 };
 // Определяем функцию renderBigPicture, которая принимает объект picture в качестве аргумента.
 const renderBigPicture = function (picture) {

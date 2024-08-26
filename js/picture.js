@@ -5,6 +5,7 @@ const createElement = function (picture) {
   const element = template.content.querySelector('a').cloneNode(true);
   const img = element.querySelector('.picture__img');
   img.src = picture.url;
+  img.alt = picture.description;
   const likes = element.querySelector('.picture__likes');
   likes.textContent = picture.likes;
   const comments = element.querySelector('.picture__comments');
