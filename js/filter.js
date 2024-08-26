@@ -25,7 +25,7 @@ const debounceRenderPictures = debounce (renderPictures);
 // Функция для получения случайных фотографий
 function getRandomPhotos(photos, count = 10) {
   // Перемешиваем массив
-  const shuffledPhotos = photos.sort(() => 0.5 - Math.random());
+  const shuffledPhotos = photos.slice().sort(() => 0.5 - Math.random());
   // Берем первые `count` элементов
   return shuffledPhotos.slice(0, count);
 }
@@ -34,7 +34,7 @@ function getRandomPhotos(photos, count = 10) {
 // Эта функция принимает массив photos и сортирует его в порядке убывания количества комментариев.
 function sortByComments(photos) {
   // b.comments.length - a.comments.length: Если b имеет больше комментариев, чем a, эта функция возвращает положительное число, сортируя b выше.
-  return photos.sort((a, b) => b.comments.length - a.comments.length);
+  return photos.slice().sort((a, b) => b.comments.length - a.comments.length);
 }
 
 // Реализовать переключение по кнопкам,через обработчик событий

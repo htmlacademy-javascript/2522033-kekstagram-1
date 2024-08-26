@@ -20,6 +20,8 @@ const effectLevel = document.querySelector('.img-upload__effect-level');
 const smallerButton = document.querySelector('.scale__control--smaller');
 const biggerButton = document.querySelector('.scale__control--bigger');
 const effectRadios = document.querySelectorAll('.effects__radio');
+const form = document.querySelector('.img-upload__form');
+
 
 smallerButton.addEventListener('click', () => {
   //  Находим элемент, содержащий значение масштабирования
@@ -132,7 +134,7 @@ noUiSlider.create(sliderElement, {
 });
 
 let selectedEffect = 'none'; // Начальный эффект - "Оригинал"
-
+effectLevel.classList.add('hidden');
 // Функция для обновления стиля изображения
 function updateImageStyle(effectClass, level) {
   previewImage.style.filter = '';
@@ -184,4 +186,8 @@ effectRadio.forEach((radio) => {
   });
 });
 
-
+form.addEventListener('reset', () =>{
+  effectLevel.classList.add('hidden');
+  previewImage.style = '';
+  updateImageEffect('none');
+});
