@@ -216,7 +216,7 @@ const onFormSubmit = async (evt) => {
   // Предотвращаем стандартное поведение отправки формы (перезагрузка страницы)
   evt.preventDefault();
   if (!pristine.validate()){
-    // return;
+    return;
   }
   //  Создать FormData с данными формы
   const formData = new FormData(form);
