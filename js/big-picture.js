@@ -88,8 +88,11 @@ const renderComments = function (comments) {
     if (displayedCommentsCount >= totalCommentsCount) {
       loadMoreButton.classList.add('hidden');
     }else{
+      // Делаем кнопку видимой
       loadMoreButton.classList.remove('hidden');
+      // Создаем функцию, которая будет вызываться при нажатии на кнопку
       onLoadMoreButtonClick = () => {
+      // Загружаем дополнительные комментарии
         loadMoreComments();
       };
 

@@ -178,16 +178,22 @@ effectRadio.forEach((radio) => {
     updateImageStyle(selectedEffect, 100);
 
     // Скрыть или показать слайдер
+    // Проверяем, выбран ли эффект "none" (без эффекта)
     if (selectedEffect === 'none') {
+    // Если эффект "none", скрываем элемент с уровнем эффекта
       effectLevel.classList.add('hidden');
     } else {
+    // Если эффект не "none", показываем элемент с уровнем эффекта
       effectLevel.classList.remove('hidden');
     }
   });
 });
-
+// Прикрепляем обработчик события "reset" к форме
 form.addEventListener('reset', () =>{
+// Добавляем класс "hidden" к элементу effectLevel, чтобы скрыть его
   effectLevel.classList.add('hidden');
+  // Сбрасываем стили элемента previewImage, возвращая изображение в исходное состояние
   previewImage.style = '';
+  // Вызываем функцию updateImageEffect, чтобы сбросить эффект изображения к "none"
   updateImageEffect('none');
 });
