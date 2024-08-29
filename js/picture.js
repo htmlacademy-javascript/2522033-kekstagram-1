@@ -2,16 +2,16 @@ import { renderBigPicture } from './big-picture.js';
 
 const template = document.querySelector('#picture');
 const createElement = function (picture) {
-  const element = template.content.querySelector('a').cloneNode(true);
-  const img = element.querySelector('.picture__img');
-  img.src = picture.url;
+  const cloneElement = template.content.querySelector('a').cloneNode(true);
+  const pictureImg = cloneElement.querySelector('.picture__img');
+  pictureImg.src = picture.url;
   // Устанавливает атрибут alt для элемента изображения. присвоить альтернативный текст для изображения
-  img.alt = picture.description;
-  const likes = element.querySelector('.picture__likes');
+  pictureImg.alt = picture.description;
+  const likes = cloneElement.querySelector('.picture__likes');
   likes.textContent = picture.likes;
-  const comments = element.querySelector('.picture__comments');
+  const comments = cloneElement.querySelector('.picture__comments');
   comments.textContent = picture.comments.length;
-  return element;
+  return cloneElement;
 };
 
 const renderPictures = function (pictures) {
