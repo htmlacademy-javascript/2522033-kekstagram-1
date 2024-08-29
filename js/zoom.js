@@ -13,14 +13,14 @@
 // Найти элементы
 const previewImage = document.querySelector('.img-upload__preview img');
 const sliderElement = document.querySelector('.effect-level__slider');
-const effectLevelValue = document.querySelector('.effect-level__value');
+const effectValue = document.querySelector('.effect-level__value');
 const effectRadio = document.querySelectorAll('.effects__radio');
 const effectLevel = document.querySelector('.img-upload__effect-level');
 
 const smallerButton = document.querySelector('.scale__control--smaller');
 const biggerButton = document.querySelector('.scale__control--bigger');
 const effectRadios = document.querySelectorAll('.effects__radio');
-const form = document.querySelector('.img-upload__form');
+const uploadForm = document.querySelector('.img-upload__form');
 
 
 smallerButton.addEventListener('click', () => {
@@ -161,7 +161,7 @@ function updateImageStyle(effectClass, level) {
 // Обработчик события change для слайдера
 sliderElement.noUiSlider.on('update', (values, handle) => {
   const level = values[handle];
-  effectLevelValue.value = level;
+  effectValue.value = level;
   updateImageStyle(selectedEffect, level);
 });
 
@@ -172,7 +172,7 @@ effectRadio.forEach((radio) => {
 
     // Сброс уровня интенсивности
     sliderElement.noUiSlider.set([100]); // 100% - начальное значение
-    effectLevelValue.value = 100;
+    effectValue.value = 100;
 
     // Обновление стиля изображения
     updateImageStyle(selectedEffect, 100);
@@ -189,7 +189,7 @@ effectRadio.forEach((radio) => {
   });
 });
 // Прикрепляем обработчик события "reset" к форме
-form.addEventListener('reset', () =>{
+uploadForm.addEventListener('reset', () =>{
 // Добавляем класс "hidden" к элементу effectLevel, чтобы скрыть его
   effectLevel.classList.add('hidden');
   // Сбрасываем стили элемента previewImage, возвращая изображение в исходное состояние

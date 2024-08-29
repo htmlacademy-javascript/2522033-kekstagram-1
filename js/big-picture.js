@@ -4,10 +4,10 @@ const captionElement = document.querySelector('.social__caption');
 const bigPicture = document.querySelector('.big-picture');
 const closeButton = document.querySelector('#picture-cancel');
 
-const loadMoreButton = document.querySelector('.social__comments-loader');
-const commentCountElement = document.querySelector('.social__comment-count');
+const downloadButton = document.querySelector('.social__comments-loader');
+const commentElement = document.querySelector('.social__comment-count');
 const commentsContainer = document.querySelector('.social__comments');
-let onLoadMoreButtonClick = null;
+let buttonClick = null;
 
 // Определяет функцию createComment, которая принимает объект comment в качестве аргумента.
 const createComment = function (comment) {
@@ -45,8 +45,8 @@ function closeBigPicture() {
   document.body.classList.remove('modal-open');
   // Добавляем класс hidden к big-picture
   bigPicture.classList.add('hidden');
-  if (onLoadMoreButtonClick !== null) {
-    loadMoreButton.removeEventListener('click', onLoadMoreButtonClick);
+  if (buttonClick !== null) {
+    downloadButton.removeEventListener('click', buttonClick);
   }
 }
 // Обработчик нажатия на кнопку закрытия
@@ -66,9 +66,9 @@ const renderComments = function (comments) {
   // 3. Получаем общее количество комментариев
   const totalCommentsCount = comments.length;
 
-  // 4. Функция для обновления текста элемента commentCountElement
+  // 4. Функция для обновления текста элемента commentElement
   function updateCommentCount() {
-    commentCountElement.textContent = `(${displayedCommentsCount}/${totalCommentsCount})`;
+    commentElement.textContent = `(${displayedCommentsCount}/${totalCommentsCount})`;
   }
   // 5. Функция для загрузки дополнительных комментариев
   function loadMoreComments() {
@@ -86,25 +86,23 @@ const renderComments = function (comments) {
     updateCommentCount();
     // 11. Если все комментарии уже отображены, скрываем кнопку "Загрузить больше"
     if (displayedCommentsCount >= totalCommentsCount) {
-      loadMoreButton.classList.add('hidden');
+      downloadButton.classList.add('hidden');
     }else{
       // Делаем кнопку видимой
-      loadMoreButton.classList.remove('hidden');
+      downloadButton.classList.remove('hidden');
       // Создаем функцию, которая будет вызываться при нажатии на кнопку
-      onLoadMoreButtonClick = () => {
+      buttonClick = () => {
       // Загружаем дополнительные комментарии
         loadMoreComments();
       };
 
-
-      // 13. Добавляем обработчик события 'click' к кнопке "Загрузить ещё"
-      loadMoreButton.addEventListener('click', onLoadMoreButtonClick, {once: true});
+      // 12. Добавляем обработчик события 'click' к кнопке "Загрузить ещё"
+      downloadButton.addEventListener('click', buttonClick, {once: true});
     }
   }
 
-  // 12. Вызываем функцию loadMoreComments для отображения первых 5 комментариев
+  // 13. Вызываем функцию loadMoreComments для отображения первых 5 комментариев
   loadMoreComments();
-
 
 };
 // Определяем функцию renderBigPicture, которая принимает объект picture в качестве аргумента.

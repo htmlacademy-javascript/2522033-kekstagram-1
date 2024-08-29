@@ -179,6 +179,8 @@ function hideModal() {
   overlay.classList.add('hidden');
   //  Удаляем класс "modal-open" из элемента body, чтобы вернуть прокрутку
   body.classList.remove('modal-open');
+  // вызвать pristine.validate для проверки валидности хештега
+  pristine.validate();
 }
 
 //  Функция обработчик клика по кнопке "Отмена"
@@ -187,11 +189,6 @@ const onCancelButtonClick = () => {
   hideModal();
 };
 
-// Получаем выбранный файл
-// Если файл выбран, считываем его как данные URL,проверить изображение на форматы jpg png
-// вызвать функцию showModal();
-// вызвать функцию URL.createObjectURL передать туда загруженный файл
-// Заменить изображение из атрибута src полученный URL присвоить в src изображения
 
 const onFileInputChange = (event) => {
   // Получаем выбранный файл
@@ -238,7 +235,7 @@ const onFormSubmit = async (evt) => {
 //  Добавляем обработчик события 'change' для поля выбора файла (fileField)
 fileField.addEventListener('change', onFileInputChange);
 
-//  Добавляем обработчик события 'click' для кнопки "Отмена(крестик)" (cancelButton)
+//  Добавляем обработчик события 'click' для кнопки "Отмена(крестик)"(cancelButton)
 cancelButton.addEventListener('click', onCancelButtonClick);
 
 //  Добавляем обработчик события 'submit' для формы (form)
